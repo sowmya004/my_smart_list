@@ -7,16 +7,17 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.98.0">
-    <title>Speech-To-Text-Converter</title>
+    <title>mySmartCart</title>
 
+    <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
 
-    
     <link rel="stylesheet" href="../static/css/style.css">
-    
-    
 
+
+    <link rel="stylesheet" href="my_smart_list\static\icons\css">
 <link href="/docs/5.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 
     <!-- Favicons -->
@@ -100,35 +101,65 @@
 
 <main>
 
-  <section class="py-5 text-center container">
+  <section class="py-5 text-center container" style="background-color: #E8F9FD; padding: 0;">
     <div class="row py-lg-5">
       <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Speech to Text Converter</h1>
-        <p class="lead text-muted">Speech Input To Text Result</p>
-        <div id="result" align="center">
-          <button type="button" class="btn btn-secondary more_items" onclick="window.location.href='/voice-input'">Record More Items?</button>
-          <!-- <a href="{{ url_for('vr') }}">Add more items to list</a> -->
-          <br>
-            <p> SPEECH TEXT: </p>
-            <ul>
-            {% for i in voice_list %}
-                <li>{{ i }}</li>
-            {% endfor %}
-            </ul>
-          <button type="button" class="btn btn-info view_button" onclick="window.location.href='/recommended-results'">View Choices</button>
-          <!-- <a href="{{ url_for('continueShopping') }}">Do you want to continue shopping?</a> -->
-        </div>
+        <h1 class="fw-light">MY SMART CART</h1>
+        <p class="lead text-muted">Displaying the best choice for you!</p>
+        <!-- <p>
+          <a href="#" class="btn btn-primary my-2">Main call to action</a>
+          <a href="#" class="btn btn-secondary my-2">Secondary action</a>
+        </p> -->
+
+        <button class="btn btn-info" onclick="window.location.href='/recommended-results'">Go to next item</button>
+        <br>
+        <br>
+
+        <button class="btn btn-info" onclick="window.location.href='/'">Go to home page</button>
+        
       </div>
+      
     </div>
   </section>
 
-</main>
+  <div class="album py-5 bg-light">
+    <div class="container">
 
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        {% for i in range(0, count) %}
+
+          <div class="col">
+            <div class="card shadow-sm">
+              <!-- <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg> -->
+              <img class="bd-placeholder-img card-img-top" width="100%" height="225" src={{imageSRCs[i]}} role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false">
+              <div class="card-body">
+                <a class="card-text" href={{urls[i]}}>{{ descriptions[i] }}</a>
+                <div class="d-flex justify-content-between align-items-center ">
+                  <p class="card-text">{{prices[i]}}</p>
+                  <p class="card-text">{{ratings[i]}}</p>
+                  <small class="text-muted">{{reviewCounts[i]}}</small>
+
+                  {% if WebsiteNames[i] == "Amazon" %}
+                    <img src="../static/icons/amazon-brands.svg" width="25px" height="25px" alt="amazon logo">
+                  {% else %}
+                    <img src="../static/icons/1217101_flipkart_icon.svg" width="25px" height="25px" alt="flipkart logo">
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+</main>
 
 
     <script src="/docs/5.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+
       
   </body>
 </html>

@@ -1,0 +1,12 @@
+.view_button{
+    position: relative;
+    top: 10px;
+}
+
+.more_items{
+    position: relative;
+    bottom: 10px;
+}
+body{
+    background-color: #E8F9FD;
+}

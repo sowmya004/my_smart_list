@@ -1,20 +1,23 @@
 from PIL import Image
 import pytesseract
 import re
+from autocorrect import autocorrect
 
 pytesseract.pytesseract.tesseract_cmd = "C:\\Program Files\\Tesseract-OCR\\tesseract.exe"
-res = []
+
 
 
 def ocr_core(filename):
     """
     This function will handle the core OCR processing of images.
     """
+    res = []
     text = pytesseract.image_to_string(Image.open(filename))  # We'll use Pillow's Image class to open the image and pytesseract to detect the string in the image
-    
+    print(text)
     #Cleaning the recognized text
 
     cleaned_text = re.sub("[\([{}/\"“'^%*#)\]$!@&|()]","",text)  
+
     listRes = list(cleaned_text.split("\n"))
     while("" in listRes):
         listRes.remove("")
@@ -26,11 +29,10 @@ def ocr_core(filename):
     while("" in res):
         res.remove("")
 
-    with open("output.txt", "a") as f:
-        print(text, file=f)
+    print(res)
+    final_res = autocorrect(res)
 
-
-    return res
+    return final_res
 
 
 if __name__ == '_main_':
